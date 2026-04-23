@@ -2,6 +2,13 @@
 branch=$(git branch --show-current)
 commit="${1:-update}"
 
+if [ "$branch" = "dev" ]; then
+  echo "❌ Você está na branch 'dev'."
+  echo "👉 Crie uma nova branch antes de continuar:"
+  echo "   git checkout -b feature/sua-feature"
+  exit 1
+fi
+
 git add .
 git commit -m "$commit" || echo "⚠️ Nenhuma alteração para commitar"
 git push -u origin "$branch" || exit 1
