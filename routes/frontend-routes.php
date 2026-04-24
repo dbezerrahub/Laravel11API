@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Services\ApiAuthentication\ApiAuthenticationServiceInterface;
 use Illuminate\Support\Facades\Route;
 use App\Http\Interfaces\FrontAuthenticationInterface;
 
@@ -33,9 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 ###### AuthenticationInterface ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/auth-interface')->group(function () {
-        Route::post('login', [FrontAuthenticationInterface::class, 'login'])->name('login');
-        Route::get('get-google-client-keys', [FrontAuthenticationInterface::class, 'getGoogleClientKeys'])->name('getGoogleClientKeys');
+    Route::prefix('auth-interface')->group(function () {
+        Route::post('login', [ApiAuthenticationServiceInterface::class, 'login'])->name('login');
     });
 });
 

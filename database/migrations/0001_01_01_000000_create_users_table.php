@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id()->primary();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('client_secret');
+            $table->string('google_refresh_token');
+            $table->string('google_access_token');
+            $table->string('fcm_token');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

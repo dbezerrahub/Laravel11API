@@ -16,7 +16,7 @@ class EndpointAuthorizationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->header('Authorizations')) {
+        if (!$request->header('Authorization')) {
             $authKey = hash('sha256', $request->header('Endpoint-Authorization-Token'));
             $endpoint = EndpointAuthorization::where('token', $authKey)
             ->where('endpoint', $request->path())

@@ -4,27 +4,26 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Helpers\ModelHelper;
+use App\Models\DAO\UserDAO;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
-use Exception;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
-     * The attributes that are mass assignable.
+     * Quais atributos podem ser preenchidos via array
      *
      * @var list<string>
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'email'
     ];
 
     /**
@@ -33,8 +32,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'client_secret'
     ];
 
     /**
@@ -45,36 +43,32 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'id'                => 'integer',
-            'name'              => 'string',
-            'email'             => 'string',
-            'password'          => 'string',
-            'remember_token'    => 'string',
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
+            'id'                    => 'integer',
+            'name'                  => 'string',
+            'email'                 => 'string',
+            'client_secret'         => 'string',
+            'google_refresh_token'  => 'string',
+            'google_access_token'   => 'string',
+            'fcm_token'             => 'string',
+            'email_verified_at'     => 'datetime'
         ];
     }
 
-    /**
-     * @param array $id_array
-     * @param string $field_name nome do atributi a ser pesquisado
-     * @return array array de nomes
-     */
-    static function get($search_field, $value_search_field) {
-            // Usando DB retornará todos os atributos
-            /*
-             $users = DB::select(
-                "SELECT * FROM users WHERE $search_field = '$value_search_field'"
-            );
-             */
-            if(preg_match('/^\d+$/', $value_search_field)) {
-                $value_search_field = (int) $value_search_field;
-            }
-            if(!ModelHelper::isSameType(User::class, $search_field, $value_search_field)) {
-                return ["message" => "Os parâmetros de pesquisa não correspondem ao mesmo tipo"];
-            }
-            // Usando a classe user (Eloquent) não vai retornar os atributos hidden
-            $users = User::where($search_field, $value_search_field)->get();
-            return $users;
+    public static function find_first($where) {
+        return UserDAO::select('find_first', $where);
+    }
+    public static function find_all($where) {
+        return UserDAO::select('find_all', $where);
+    }
+    public static function getByEmail($email) {
+        $where = ['where', 'email', '=', $email];
+        $user = self::find_first([$where]);
+        return $user;
+    }
+
+    public static function getBy($attribute, $value) {
+        $where = ['where', $attribute, '=', $value];
+        $user = self::find_first([$where]);
+        return $user;
     }
 }
