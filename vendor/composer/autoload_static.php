@@ -531,6 +531,7 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     );
 
     public static $classMap = array (
+        'App\\Exceptions\\ApiResponseException' => __DIR__ . '/../..' . '/app/Exceptions/ApiResponseException.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Helper' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
         'App\\Helpers\\ModelHelper' => __DIR__ . '/../..' . '/app/Helpers/ModelHelper.php',
@@ -543,6 +544,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'App\\Http\\Middleware\\CheckHttpResponse' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckHttpResponse.php',
         'App\\Http\\Middleware\\EndpointAuthorizationMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/EndpointAuthorizationMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfUnauthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfUnauthenticated.php',
+        'App\\Http\\Services\\ApiAuthentication\\ApiAuthenticationServiceController' => __DIR__ . '/../..' . '/app/Http/Services/ApiAuthentication/ApiAuthenticationServiceController.php',
+        'App\\Http\\Services\\ApiAuthentication\\ApiAuthenticationServiceInterface' => __DIR__ . '/../..' . '/app/Http/Services/ApiAuthentication/ApiAuthenticationServiceInterface.php',
+        'App\\Http\\Services\\ResponseApi' => __DIR__ . '/../..' . '/app/Http/Services/ResponseApi.php',
+        'App\\Jobs\\DeleteExpiredTokens' => __DIR__ . '/../..' . '/app/Jobs/DeleteExpiredTokens.php',
         'App\\Models\\CustomLog' => __DIR__ . '/../..' . '/app/Models/CustomLog.php',
         'App\\Models\\DAO\\DAO' => __DIR__ . '/../..' . '/app/Models/DAO/DAO.php',
         'App\\Models\\DAO\\FrontendDAO' => __DIR__ . '/../..' . '/app/Models/DAO/FrontendDAO.php',

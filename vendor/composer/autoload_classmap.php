@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Exceptions\\ApiResponseException' => $baseDir . '/app/Exceptions/ApiResponseException.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\Helper' => $baseDir . '/app/Helpers/Helper.php',
     'App\\Helpers\\ModelHelper' => $baseDir . '/app/Helpers/ModelHelper.php',
@@ -18,6 +19,10 @@ return array(
     'App\\Http\\Middleware\\CheckHttpResponse' => $baseDir . '/app/Http/Middleware/CheckHttpResponse.php',
     'App\\Http\\Middleware\\EndpointAuthorizationMiddleware' => $baseDir . '/app/Http/Middleware/EndpointAuthorizationMiddleware.php',
     'App\\Http\\Middleware\\RedirectIfUnauthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfUnauthenticated.php',
+    'App\\Http\\Services\\ApiAuthentication\\ApiAuthenticationServiceController' => $baseDir . '/app/Http/Services/ApiAuthentication/ApiAuthenticationServiceController.php',
+    'App\\Http\\Services\\ApiAuthentication\\ApiAuthenticationServiceInterface' => $baseDir . '/app/Http/Services/ApiAuthentication/ApiAuthenticationServiceInterface.php',
+    'App\\Http\\Services\\ResponseApi' => $baseDir . '/app/Http/Services/ResponseApi.php',
+    'App\\Jobs\\DeleteExpiredTokens' => $baseDir . '/app/Jobs/DeleteExpiredTokens.php',
     'App\\Models\\CustomLog' => $baseDir . '/app/Models/CustomLog.php',
     'App\\Models\\DAO\\DAO' => $baseDir . '/app/Models/DAO/DAO.php',
     'App\\Models\\DAO\\FrontendDAO' => $baseDir . '/app/Models/DAO/FrontendDAO.php',
