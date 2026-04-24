@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Interfaces\Frontend;
+namespace App\Http\Interfaces;
 
 use App\Exceptions\Handler;
 use App\Http\Controllers\InvoiceController;
