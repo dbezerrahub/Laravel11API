@@ -8,6 +8,7 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use App\Http\Middleware\EndpointAuthorizationMiddleware;
 use App\Http\Middleware\RedirectIfUnauthenticated;
 use App\Jobs\DeleteExpiredTokens;
+use Illuminate\Console\Scheduling\Schedule;
 
 
 use Illuminate\Http\Response;
