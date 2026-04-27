@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Services\ApiAuthentication\ApiAuthenticationServiceInterface;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\TestController;
+use App\Services\ApiAuthentication\ApiAuthenticationServiceInterface;
 use Illuminate\Support\Facades\Route;
 use App\Http\Interfaces\FrontAuthenticationInterface;
 
@@ -17,11 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
             
         });
 
-        ###### LogInterface ######
-        Route::prefix('app/log-interface')->group(function () {
-            Route::post('save-log', [LogInterface::class, 'saveLog'])->name('saveLog');
-        });
-
         ###### Email Interface ######
         Route::prefix('app/email-interface')->group(function () {
             #Route::post('send-with-mailgun', [EmailInterface::class, 'sendWithMailgun'])->name('sendWithMailgun');
@@ -32,28 +29,28 @@ Route::middleware('auth:sanctum')->group(function () {
 #################################################
 ############## Somente Autorização ##############
 
-###### AuthenticationInterface ######
+###### API Authentication ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('auth-interface')->group(function () {
-        Route::post('login', [ApiAuthenticationServiceInterface::class, 'login'])->name('login');
+    Route::prefix('auth')->group(function () {
+        Route::post('login', [ApiAuthController::class, 'login'])->name('login');
     });
 });
 
-###### HelperInterface ######
+###### Helper ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/helper-interface')->group(function () {
+    Route::prefix('app/helper')->group(function () {
         #Route::get('get-datetime-info', [HelperInterface::class, 'getDateTimeInfo'])->name('getDateTimeInfo');
     });
 });
-###### EmailInterface não autenticável ######
+###### Email ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/email-interface')->group(function () {
+    Route::prefix('app/email')->group(function () {
         #Route::post('check-email-connection', [EmailInterface::class, 'checkEmailConnection'])->name('checkEmailConnection');
     });
 });
-###### UserInterface ######
+###### User ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/user-interface')->group(function () {
+    Route::prefix('app/user')->group(function () {
         #Route::post('add-user', [UserInterface::class, 'addUser'])->name('addUser');
         #Route::post('create-user-key', [UserInterface::class, 'createUserKey'])->name('createUserKey');
         #Route::post('save-google-token', [UserInterface::class, 'saveGoogleToken'])->name('saveGoogleToken');
@@ -61,17 +58,16 @@ Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
     });
 });
 
-
-###### Teste Interface #######
+###### Test #######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/teste-interface')->group(function () {
-        #Route::post('teste', [TesteInterface::class, 'teste'])->name('teste');
+    Route::prefix('test')->group(function () {
+        Route::post('print_request', [TestController::class, 'print_request'])->name('print_request');
     });
 });
 
-###### ContactInterface ######
+###### Contact ######
 Route::middleware('EndpointAuthorizationMiddleware')->group(function () {
-    Route::prefix('app/contact-interface')->group(function () {
+    Route::prefix('app/contact')->group(function () {
         #Route::post('send-contact-email', [ContactInterface::class, 'sendContactEmail'])->name('sendContactEmail');
     });
 });
